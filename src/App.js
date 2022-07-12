@@ -11,11 +11,25 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import Paper from "@mui/material/Paper";
 import CardContent from "@mui/material/CardContent";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { Button, Grid, Link, Tooltip, Zoom } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  Grid,
+  Link,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Tooltip,
+  Zoom,
+} from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,6 +80,12 @@ function App() {
     pod: "No Session",
     region: "No Session",
   });
+
+  const [accessProfiles, setAccessProfiles] = useState();
+  const [identityProfiles, setIdentityProfiles] = useState();
+  const [roles, setRoles] = useState();
+  const [betasources, setBetaSources] = useState();
+
   const [tenantSessions, setTenantSessions] = useState();
 
   const [tenant, setTenant] = useState("No Session");
@@ -133,6 +153,68 @@ function App() {
                   setHostingData(result);
                 });
 
+              fetch(
+                apiURLTemplate.replace("tenant", tempTenant) + "/beta/roles",
+                {
+                  method: "GET", // POST, PUT, DELETE, etc.
+                  headers: {
+                    Authorization: "Bearer " + result.accessToken,
+                    "X-CSRF-Token": result.csrfToken,
+                  },
+                }
+              )
+                .then((response) => response.json())
+                .then((result) => {
+                  setRoles(result);
+                });
+
+              fetch(
+                apiURLTemplate.replace("tenant", tempTenant) +
+                  "/beta/identity-profiles",
+                {
+                  method: "GET", // POST, PUT, DELETE, etc.
+                  headers: {
+                    Authorization: "Bearer " + result.accessToken,
+                    "X-CSRF-Token": result.csrfToken,
+                  },
+                }
+              )
+                .then((response) => response.json())
+                .then((result) => {
+                  setIdentityProfiles(result);
+                });
+
+              fetch(
+                apiURLTemplate.replace("tenant", tempTenant) + "/beta/sources",
+                {
+                  method: "GET", // POST, PUT, DELETE, etc.
+                  headers: {
+                    Authorization: "Bearer " + result.accessToken,
+                    "X-CSRF-Token": result.csrfToken,
+                  },
+                }
+              )
+                .then((response) => response.json())
+                .then((result) => {
+                  setBetaSources(result);
+                });
+
+              fetch(
+                apiURLTemplate.replace("tenant", tempTenant) +
+                  "/beta/access-profiles",
+                {
+                  method: "GET", // POST, PUT, DELETE, etc.
+                  headers: {
+                    Authorization: "Bearer " + result.accessToken,
+                    "X-CSRF-Token": result.csrfToken,
+                  },
+                }
+              )
+                .then((response) => response.json())
+                .then((result) => {
+                  setAccessProfiles(result);
+                });
+
               chrome.storage?.sync.get(["tenantSessions"], function (sessions) {
                 setTenantSessions(sessions);
                 console.log("Tenant Sessions State:");
@@ -157,6 +239,26 @@ function App() {
       );
   }
 
+handleCheckboxClick = (event, id) => {
+    event.stopPropagation();
+    console.log("checkbox select");
+    const { selected } = this.state;
+    const selectedIndex = selected.indexOf(id);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
   function UpdateSession() {
     useEffect(() => {
       FetchSession();
@@ -167,6 +269,14 @@ function App() {
 
   console.log("Session:");
   console.log(session);
+  console.log("Beta Sources");
+  console.log(betasources);
+  console.log("Access Profiles");
+  console.log(accessProfiles);
+  console.log("Roles");
+  console.log(roles);
+  console.log("Identity Profiles");
+  console.log(identityProfiles);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -183,8 +293,9 @@ function App() {
           aria-label="basic tabs example"
         >
           <Tab label="Tenant" {...a11yProps(0)} />
-          <Tab label="Support" {...a11yProps(1)} />
-          <Tab label="About" {...a11yProps(2)} />
+          <Tab label="Generate Support Bundle" {...a11yProps(1)} />
+          <Tab label="Support Links" {...a11yProps(2)} />
+          <Tab label="About" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -267,6 +378,84 @@ function App() {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
+        {" "}
+        <Accordion>
+          <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+            <Typography>Access Profiles</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 350 }} size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Requestable</TableCell>
+                    <TableCell>Enabled</TableCell>
+                    <TableCell>Source</TableCell>
+                    <TableCell>Requestable</TableCell>
+                    <TableCell>Enabled</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {accessProfiles?.map((row) => {
+                    const isSelected = this.isSelected(n.id);
+                    <TableRow
+                      key={row.name}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          onClick={event =>
+                            this.handleCheckboxClick(event, n.id)
+                          }
+                          className="selectCheckbox"
+                          checked={isSelected}
+                        />
+                      </TableCell>
+                      <TableCell>{row.name}</TableCell>
+                    </TableRow>
+})}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+            <Typography>Identities</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Table></Table>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+            <Typography>Identity Profiles</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Table></Table>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+            <Typography>Sources</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Table></Table>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+            <Typography>Roles</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Table></Table>
+          </AccordionDetails>
+        </Accordion>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
         <Accordion>
           <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
             <Typography>General</Typography>
@@ -642,7 +831,7 @@ function App() {
           </AccordionDetails>
         </Accordion>
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={3}>
         <Typography sx={{ fontSize: 14 }} color="text.secondary">
           Anchor
           <br />
