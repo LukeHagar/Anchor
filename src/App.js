@@ -376,6 +376,27 @@ function App() {
               <Grid item xs={12}>
                 <Button fullWidth variant="outlined">
                   <Tooltip
+                    title={"IdentityNow User Level Access Matrix"}
+                    placement="bottom"
+                    TransitionComponent={Zoom}
+                    arrow
+                  >
+                    <Link
+                      href={
+                        "https://documentation.sailpoint.com/saas/help/common/users/user_level_matrix.html"
+                      }
+                      target="_blank"
+                      color="primary"
+                      underline="hover"
+                    >
+                      Access Matrix
+                    </Link>
+                  </Tooltip>
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Button fullWidth variant="outlined">
+                  <Tooltip
                     title={"Developer Beta API Reference"}
                     placement="bottom"
                     TransitionComponent={Zoom}
