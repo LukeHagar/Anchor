@@ -12,7 +12,7 @@
     "48": "images/anchor_48.png",
     "128": "images/anchor_128.png"
   },
-  "permissions": ["contextMenus", "storage", "activeTab", "tabs", "scripting"],
+  "permissions": ["tabs"],
   "host_permissions": ["http://*/", "https://*/"],
   "action": {
     "default_popup": "index.html",
