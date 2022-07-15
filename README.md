@@ -8,12 +8,12 @@ Written By: Luke Hagar
 
 This is a Chrome extension written in react designed to aid customers in working with both IdentityNow and SailPoint Support
 
-![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%201.png)
-![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%202.png)
-![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%203.png)
-![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%204.png)
-![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%205.png)
 ![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%206.png)
+![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%205.png)
+![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%204.png)
+![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%203.png)
+![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%202.png)
+![](https://github.com/luke-hagar-sp/anchor/blob/master/readme-contents/Screen%20Shot%201.png)
 
 ## Known Issues
 
