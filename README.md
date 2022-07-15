@@ -38,7 +38,7 @@ A quick link to open a support ticket
 
 
 ## Road Map
-- Add additional Object categories for the support bundle generator()
+- Add additional Object categories for the support bundle generator(Transforms, Entitlements, Workflows)
 - Maybe rething the generator UI formatting?
 - Add some simpler standard/common API calls customers use often
 
