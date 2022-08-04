@@ -27,7 +27,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextareaAutosize,
   TextField,
   Tooltip,
   Zoom,
@@ -383,10 +382,6 @@ function App() {
             "\r")
       );
     setFinalBundle(bundleLoop);
-  }
-
-  function Capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   function UpdateSession() {
