@@ -1,6 +1,8 @@
 # Anchor
 Written By: Luke Hagar
 
+<img src="https://img.shields.io/lgtm/grade/javascript/github/LukeHagar/Anchor" />
+
 > This extension is not developed, maintained or supported by SailPoint. 
 > It is a community effort to help manage and support IdentityNow.
 
