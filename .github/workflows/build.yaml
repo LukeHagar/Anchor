@@ -59,14 +59,14 @@ jobs:
         if: steps.buildCC.outcome == 'success'
         run: |
           cd anchor
-          pnpm install
+          yarn install
 
       - name: Build Extension
         id: buildExtension
         if: steps.installDeps.outcome == 'success'
         run: |
           cd anchor
-          pnpm build
+          yarn build
 
       - name: Archive chrome-extension artifact
         uses: actions/upload-artifact@v2
