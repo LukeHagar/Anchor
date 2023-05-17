@@ -71,14 +71,14 @@ jobs:
         if: steps.buildCC.outcome == 'success'
         run: |
           cd anchor
-          yarn install
+          npm ci
 
       - name: Build Extension
         id: buildExtension
         if: steps.installDeps.outcome == 'success'
         run: |
           cd anchor
-          yarn build
+          npm run build
           zip -r anchor-${{ github.sha }}.zip build
 
       - name: Archive chrome-extension artifact
