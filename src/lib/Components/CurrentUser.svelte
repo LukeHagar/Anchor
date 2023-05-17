@@ -5,7 +5,7 @@
 </script>
 
 <div class="p-2 card variant-soft-surface min-w-[150px]">
-	<p class="underline text-center pb-2">Current User</p>
+	<h1 class="text-center pb-2">Current User</h1>
 	<div class="flex flex-row justify-between">
 		<p class="text-sm">Account:</p>
 		<p class="text-sm">{$tenantData.uid}</p>

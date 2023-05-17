@@ -15,7 +15,7 @@
 </script>
 
 <div class="p-2 card variant-soft-surface">
-	<p class="underline text-center pb-2">Support</p>
+	<h1 class="text-center pb-2">Support</h1>
 	<div class="flex flex-col gap-2">
 		{#each links as link}
 			<a class="btn btn-sm variant-filled" target="_blank" rel="noreferrer" href={link.href}>

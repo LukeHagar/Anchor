@@ -4,7 +4,6 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"prebuild": "curl https://raw.githubusercontent.com/sailpoint-oss/api-specs/main/dereferenced/deref-sailpoint-api.v3.yaml -o src/lib/V3Spec.yaml && curl https://raw.githubusercontent.com/sailpoint-oss/api-specs/main/dereferenced/deref-sailpoint-api.beta.yaml -o src/lib/BetaSpec.yaml && yq -o=json eval src/lib/V3Spec.yaml > src/routes/api-client/V3Spec.json && yq -o=json eval src/lib/BetaSpec.yaml > src/routes/api-client/BetaSpec.json",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -27,6 +26,7 @@
 		"@typescript-eslint/parser": "^5.45.0",
 		"algoliasearch": "^4.17.0",
 		"autoprefixer": "^10.4.14",
+		"axios": "^1.4.0",
 		"dayjs": "^1.11.7",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",

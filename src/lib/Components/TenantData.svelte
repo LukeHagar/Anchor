@@ -5,7 +5,7 @@
 </script>
 
 <div class="p-2 card variant-soft-surface min-w-[150px]">
-	<p class="underline text-center pb-2">Tenant Data</p>
+	<h1 class="text-center pb-2">Tenant Data</h1>
 	<div class="flex flex-row flex-wrap justify-between">
 		<p class="text-sm">Name:</p>
 		<p class="text-sm px-1">{$tenantData.org.name}</p>

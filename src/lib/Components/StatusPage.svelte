@@ -16,7 +16,7 @@
 </script>
 
 <div class="p-2 card variant-soft-surface min-w-[183.53px]">
-	<p class="underline text-center pb-2">Status Page</p>
+	<h1 class="text-center pb-2">Status Page</h1>
 	<div class="flex flex-row gap-2 justify-center">
 		{#await resp}
 			<div class="placeholder-circle w-16" />
