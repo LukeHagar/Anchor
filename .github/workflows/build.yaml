@@ -6,13 +6,18 @@ jobs:
   Build-And-Push:
     runs-on: ubuntu-latest
     steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        id: extract_branch
+
       # Checkout the main branch of this repo
       - name: Checkout PR branch
         uses: actions/checkout@v3
         with:
           repository: lukehagar/anchor
           path: anchor
-          ref: main
+          ref: ${{ steps.extract_branch.outputs.branch }}
 
       # Checkout the main branch of api-specs
       - name: Checkout API Specs Repo
@@ -53,11 +58,6 @@ jobs:
         if: steps.buildV2.outcome == 'success'
         run: |
           swagger-cli bundle --dereference api-specs/idn/sailpoint-api.cc.yaml -t json -o anchor/src/routes/api-client/CCSpec.json
-
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
-        id: extract_branch
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
