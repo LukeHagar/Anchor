@@ -3,9 +3,10 @@
 	import { JSONEditor } from 'svelte-jsoneditor';
 	import 'svelte-jsoneditor/themes/jse-theme-dark.css';
 
-	import BetaSpec from './BetaSpec.json';
-	import CustomSpec from './CustomSpec.json';
-	import V3Spec from './V3Spec.json';
+	import { paths as V2Spec } from './IdentityNow-V2-APIReference.json';
+	import { paths as BetaSpec } from './IdentityNow-Beta-APIReference.json';
+	import { paths as V3Spec } from './IdentityNow-V3-APIReference.json';
+	import { paths as CCSpec } from './Identitynow-CC-APIReference.json';
 
 	let APIVersions;
 
