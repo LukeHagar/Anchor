@@ -4,9 +4,9 @@
 	import { JSONEditor } from 'svelte-jsoneditor';
 	import 'svelte-jsoneditor/themes/jse-theme-dark.css';
 
-	import { paths as V2Spec } from './BetaSpec.json';
-	import { paths as BetaSpec } from './V3Spec.json';
-	import { paths as V3Spec } from './V2Spec.json';
+	import { paths as V2Spec } from './V2Spec.json';
+	import { paths as BetaSpec } from './BetaSpec.json';
+	import { paths as V3Spec } from './V3Spec.json';
 	import { paths as CCSpec } from './CCSpec.json';
 
 	import axios, { type AxiosResponse } from 'axios';
