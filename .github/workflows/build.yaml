@@ -67,9 +67,10 @@ jobs:
         run: |
           cd anchor
           yarn build
+          zip -r chrome-extension-${{ github.sha }}.zip build
 
       - name: Archive chrome-extension artifact
         uses: actions/upload-artifact@v2
         with:
           name: anchor-${{ github.sha }}
-          path: anchor-${{ github.event.pull_request.head.sha }}
+          path: anchor-${{ github.sha }}
