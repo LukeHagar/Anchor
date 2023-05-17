@@ -59,7 +59,7 @@ jobs:
           repository: anchor/
           branch: ${GITHUB_REF#refs/heads/}
           commit_message: Updated API Specifications
-          file_pattern: 'anchor/src/routes/api-client/*.json'
+          file_pattern: 'src/routes/api-client/*.json'
 
       - name: Install Dependencies
         id: installDeps
