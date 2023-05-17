@@ -9,7 +9,7 @@
 	import { paths as V3Spec } from './V3Spec.json';
 	import { paths as CCSpec } from './CCSpec.json';
 
-	import axios, { type AxiosResponse } from 'axios';
+	import axios from 'axios';
 
 	function mapPath(path: string[]) {
 		const [name, value] = path;
