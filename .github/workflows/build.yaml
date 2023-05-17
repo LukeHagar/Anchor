@@ -54,10 +54,15 @@ jobs:
         run: |
           swagger-cli bundle --dereference api-specs/idn/sailpoint-api.cc.yaml -t json -o anchor/src/routes/api-client/CCSpec.json
 
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >>$GITHUB_OUTPUT
+        id: extract_branch
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           repository: anchor/
-          branch: ${{ GITHUB_REF#refs/heads/ }}
+          branch: ${{ steps.extract_branch.outputs.branch }}
           commit_message: Updated API Specifications
           file_pattern: 'src/routes/api-client/*.json'
 
