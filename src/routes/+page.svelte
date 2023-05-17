@@ -1,22 +1,29 @@
 <script lang="ts">
-	import { idnSession } from '$lib/settings';
+	import CurrentUser from '$lib/Components/CurrentUser.svelte';
+	import HostingData from '$lib/Components/HostingData.svelte';
+	import Resources from '$lib/Components/Resources.svelte';
+	import Support from '$lib/Components/Support.svelte';
+	import StatusPage from '$lib/Components/StatusPage.svelte';
+	import TenantData from '$lib/Components/TenantData.svelte';
+	import TenantLinks from '$lib/Components/TenantLinks.svelte';
+	import { idnSession, hostingData, tenantData } from '$lib/settings';
+	import Search from '$lib/Components/Search.svelte';
 </script>
 
-<div class="p-2 flex flex-row gap-2">
-	<div class="p-1">
-		<p class="underline text-lg">Tenant Info</p>
-		<p class="text-sm">Tenant: {$idnSession.org}</p>
-		<p class="text-sm">Region: {$idnSession.region}</p>
-		<p class="text-sm">Pod: {$idnSession.pod}</p>
-	</div>
-	<div class="p-1">
-		<p class="underline text-lg">Quick Links</p>
-		<a
-			target="_blank"
-			rel="noreferrer"
-			href={$idnSession.tenant + '/ui/admin#admin:dashboard:overview'}
-		>
-			Tenant Dashboard
-		</a>
+<div class="flex flex-col h-full">
+	<Search />
+	<div class="flex flex-row h-full gap-4 p-2 grow">
+		<div class=" flex flex-col gap-4 grow">
+			<TenantData {tenantData} />
+		</div>
+
+		<div class=" flex flex-col gap-4 grow">
+			<CurrentUser {tenantData} />
+			<HostingData {hostingData} />
+		</div>
+		<div class=" flex flex-col gap-4 grow">
+			<StatusPage />
+			<Support />
+		</div>
 	</div>
 </div>

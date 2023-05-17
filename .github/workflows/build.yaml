@@ -1,0 +1,75 @@
+name: Build and Upload Chrome Extension
+
+run-name: ${{ github.actor }} is Building and Uploading a new Anchor Version 🚀
+on: [push, workflow_dispatch]
+jobs:
+  Build-And-Push:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the main branch of this repo
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+        with:
+          repository: lukehagar/anchor
+          path: anchor
+          ref: main
+
+      # Checkout the main branch of api-specs
+      - name: Checkout API Specs Repo
+        uses: actions/checkout@v3
+        with:
+          repository: sailpoint-oss/api-specs
+          path: api-specs
+          ref: main
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install swagger-cli
+        run: |
+          npm install -g swagger-cli
+
+      - name: Dereference and Bundle Beta API Specification
+        id: buildBeta
+        run: |
+          swagger-cli bundle --dereference api-specs/idn/sailpoint-api.beta.yaml -t json -o anchor/src/routes/api-client/BetaSpec.json
+
+      - name: Dereference and Bundle V3 API Specification
+        id: buildV3
+        if: steps.buildBeta.outcome == 'success'
+        run: |
+          swagger-cli bundle --dereference api-specs/idn/sailpoint-api.v3.yaml -t json -o anchor/src/routes/api-client/V3Spec.json
+
+      - name: Dereference and Bundle V2 API Specification
+        id: buildV2
+        if: steps.buildV3.outcome == 'success'
+        run: |
+          swagger-cli bundle --dereference api-specs/idn/sailpoint-api.v2.yaml -t json -o anchor/src/routes/api-client/V2Spec.json
+
+      - name: Dereference and Bundle CC API Specification
+        id: buildCC
+        if: steps.buildV2.outcome == 'success'
+        run: |
+          swagger-cli bundle --dereference api-specs/idn/sailpoint-api.cc.yaml -t json -o anchor/src/routes/api-client/CCSpec.json
+
+      - name: Install Dependencies
+        id: installDeps
+        if: steps.buildCC.outcome == 'success'
+        run: |
+          cd anchor
+          pnpm install
+
+      - name: Build Extension
+        id: buildExtension
+        if: steps.installDeps.outcome == 'success'
+        run: |
+          cd anchor
+          pnpm build
+
+      - name: Archive chrome-extension artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: anchor-${{ github.sha }}
+          path: anchor-${{ github.event.pull_request.head.sha }}

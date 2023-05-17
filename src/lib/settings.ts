@@ -1,6 +1,137 @@
 import { localStorageStore } from '@skeletonlabs/skeleton';
-import type { Writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
-export const idnSession: Writable<IdnSession> = localStorageStore('tenantData', {
-	tenant: 'https://whatever.com'
-});
+export const noSession: IdnSession = {
+	tenant: '',
+	authType: '',
+	baseUrl: '',
+	logoutUrl: '',
+	accessToken: '',
+	refreshIn: 30000,
+	pollUrl: '',
+	strongAuth: false,
+	strongAuthUrl: '',
+	csrfToken: '',
+	expiration: new Date()
+};
+
+export const noHostingData: HostingData = {
+	org: 'No Data',
+	pod: 'No Data',
+	publicPod: 'No Data',
+	layer: 'No Data',
+	region: 'No Data'
+};
+
+export const noTenantData: TenantData = {
+	id: '',
+	alias: '',
+	uid: '',
+	name: '',
+	displayName: '',
+	uuid: '',
+	encryptionKey: null,
+	encryptionCheck: null,
+	status: '',
+	pending: false,
+	passwordResetSinceLastLogin: false,
+	usageCertAttested: null,
+	userFlags: {},
+	enabled: false,
+	altAuthVia: '',
+	altAuthViaIntegrationData: null,
+	kbaAnswers: 0,
+	disablePasswordReset: false,
+	ptaSourceId: null,
+	supportsPasswordPush: false,
+	attributes: {
+		lastLoginTimestamp: 0,
+		uid: '',
+		firstname: '',
+		cloudAuthoritativeSource: '',
+		cloudStatus: '',
+		displayName: '',
+		internalCloudStatus: '',
+		lastSyncDate: '',
+		workPhone: '',
+		email: '',
+		lastname: ''
+	},
+	externalId: '',
+	role: [],
+	phone: null,
+	email: '',
+	personalEmail: null,
+	employeeNumber: null,
+	riskScore: 0,
+	featureFlags: {},
+	feature: [],
+	orgEncryptionKey: '',
+	orgEncryptionKeyId: '',
+	meta: {},
+	org: {
+		name: '',
+		scriptName: '',
+		mode: '',
+		numQuestions: 9,
+		status: '',
+		maxRegisteredUsers: 0,
+		pod: '',
+		pwdResetPersonalPhone: false,
+		pwdResetPersonalEmail: false,
+		pwdResetKba: false,
+		pwdResetEmail: false,
+		pwdResetDuo: false,
+		pwdResetPhoneMask: false,
+		authErrorText: null,
+		strongAuthKba: false,
+		strongAuthPersonalPhone: false,
+		strongAuthPersonalEmail: false,
+		integrations: [],
+		productName: '',
+		kbaReqForAuthn: 0,
+		kbaReqAnswers: 0,
+		lockoutAttemptThreshold: 0,
+		lockoutTimeMinutes: 0,
+		usageCertRequired: false,
+		adminStrongAuthRequired: false,
+		enableExternalPasswordChange: false,
+		enablePasswordReplay: false,
+		enableAutomaticPasswordReplay: false,
+		notifyAuthenticationSettingChange: false,
+		netmasks: null,
+		countryCodes: null,
+		whiteList: false,
+		usernameEmptyText: null,
+		usernameLabel: null,
+		enableAutomationGeneration: false,
+		emailTestMode: false,
+		emailTestAddress: '',
+		orgType: '',
+		passwordReplayState: '',
+		systemNotificationConfig: '',
+		maxClusterDebugHours: '',
+		brandName: '',
+		logo: null,
+		emailFromAddress: '',
+		standardLogoUrl: null,
+		narrowLogoUrl: null,
+		actionButtonColor: '',
+		activeLinkColor: '',
+		navigationColor: ''
+	},
+	stepUpAuth: false,
+	bxInstallPrompted: false,
+	federatedLogin: false,
+	auth: {
+		service: '',
+		encryption: ''
+	},
+	onNetwork: false,
+	onTrustedGeo: false,
+	loginUrl: ''
+};
+
+export const idnSession: Writable<IdnSession> = localStorageStore('tenantData', noSession);
+export const hostingData: Writable<HostingData> = writable(noHostingData);
+export const tenantData: Writable<TenantData> = writable(noTenantData);
