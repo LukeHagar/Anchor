@@ -57,7 +57,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           repository: anchor/
-          branch: ${GITHUB_REF#refs/heads/}
+          branch: ${{ GITHUB_REF#refs/heads/ }}
           commit_message: Updated API Specifications
           file_pattern: 'src/routes/api-client/*.json'
 
