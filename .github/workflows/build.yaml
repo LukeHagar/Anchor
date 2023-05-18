@@ -71,7 +71,7 @@ jobs:
         if: steps.buildCC.outcome == 'success'
         run: |
           cd anchor
-          npm install
+          npm ci
 
       - name: Build Extension
         id: buildExtension
