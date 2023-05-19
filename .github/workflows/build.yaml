@@ -100,3 +100,4 @@ jobs:
           branch: ${{ steps.extract_branch.outputs.branch }}
           commit_message: Updated Extension Manifest
           file_pattern: 'static/manifest.json'
+
