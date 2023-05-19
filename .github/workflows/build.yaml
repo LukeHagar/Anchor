@@ -1,6 +1,6 @@
-name: Build and Upload Chrome Extension
+name: Build and Create Tag
 
-run-name: ${{ github.actor }} is Building and Uploading a new Anchor Version 🚀
+run-name: ${{ github.actor }} is Building and Tagging Anchor Version ${{ github.event.inputs.version }} 🚀
 
 on:
   workflow_dispatch:
