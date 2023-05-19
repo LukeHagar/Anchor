@@ -80,7 +80,7 @@
 	let selectedAPIMethod = 'GET';
 </script>
 
-<div class="p-4 flex flex-col gap-4 h-full">
+<div class="p-2 flex flex-col gap-4 overflow-hidden overflow-y-auto">
 	<div class="flex flex-row">
 		<select
 			placeholder="Select an API Version"
@@ -138,17 +138,17 @@
 		</button>
 	</div>
 
-	<TabGroup justify="justify-center" class="grow">
+	<TabGroup justify="justify-center">
 		<Tab bind:group={tabSet} name="tab1" value={0}>Request</Tab>
 		<Tab bind:group={tabSet} name="tab2" value={1}>Response</Tab>
 	</TabGroup>
 
 	{#if tabSet === 0}
-		<div class="jse-theme-dark h-full">
+		<div class="jse-theme-dark">
 			<JSONEditor bind:content={requestContent} />
 		</div>
 	{:else if tabSet === 1}
-		<div class="jse-theme-dark h-full">
+		<div class="jse-theme-dark">
 			<JSONEditor bind:content={responseContent} />
 		</div>
 	{/if}

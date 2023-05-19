@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import {
 		InstantSearch,
 		SearchBox,
@@ -11,10 +11,6 @@
 	import SearchIcon from './searchIcon.svelte';
 
 	const searchClient = algoliasearch('TB01H1DFAM', '726952a7a9389c484b6c96808a3e0010');
-
-	// Available Indexes
-	// prod_DEVELOPER_SAILPOINT_COM
-	// discourse-posts
 
 	let index: string = 'prod_DEVELOPER_SAILPOINT_COM';
 
@@ -66,7 +62,6 @@
 										</div>
 
 										<p class="text-xs opacity-70">Tags: {hit.tags.join(', ')}</p>
-										<!-- <p class="text-xs text-primary-300 opacity-70">{hit.url_without_anchor}</p> -->
 									</div>
 								</a>
 							{:else}
@@ -90,9 +85,6 @@
 											{:else}
 												<p class="text-xs opacity-70">No Tags</p>
 											{/if}
-											<!-- <p class="text-xs text-primary-300 opacity-70 truncate max-w-[550px]">
-												{hit.topic.url}
-											</p> -->
 										</div>
 									</div>
 								</a>
@@ -108,4 +100,4 @@
 			</div>
 		</InstantSearch>
 	{/key}
-</div>
+</div> -->

@@ -1,37 +1,60 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
-	let resp: Promise<Status>;
+	let summaryResp: Promise<any>;
 
 	const getStatus = async () => {
-		console.debug('Getting Status Page Details');
-		resp = await (await fetch('https://status.sailpoint.com/api/v2/status.json')).json();
-		console.debug(resp);
+		console.debug('Getting Status Summary');
+		summaryResp = (await fetch('https://status.sailpoint.com/api/v2/summary.json')).json();
+		console.debug(await summaryResp);
 	};
+
+	let interval: any;
 
 	onMount(async () => {
 		getStatus();
-		setInterval(() => getStatus(), 10000);
+		interval = setInterval(() => getStatus(), 30000);
 	});
+
+	onDestroy(() => clearInterval(interval));
 </script>
 
-<div class="p-2 card variant-soft-surface min-w-[183.53px]">
-	<h1 class="text-center pb-2">Status Page</h1>
+<h1 class="text-center">Status Page</h1>
+
+{#await summaryResp}
 	<div class="flex flex-row gap-2 justify-center">
-		{#await resp}
-			<div class="placeholder-circle w-16" />
-			<p>Checking</p>
-		{:then status}
-			{#if status?.status?.description == 'All Systems Operational'}
-				<p class="text-green-500 text-center">All Systems Operational</p>
-			{:else}
-				<div>
-					<p class="text-red-500 text-center">Ongoing Issues</p>
-					<a href="https://status.sailpoint.com" rel="noreferrer" target="_blank">
-						Click for details
-					</a>
-				</div>
-			{/if}
-		{/await}
+		<div class="placeholder-circle w-16" />
+		<p>Checking</p>
 	</div>
-</div>
+{:then summary}
+	<div class="flex flex-row align-center gap-2 justify-center">
+		{#if summary?.status?.indicator == 'none'}
+			<a
+				href="https://status.sailpoint.com"
+				class="text-green-500 text-center hover:underline"
+				rel="noreferrer"
+				target="_blank"
+			>
+				{summary?.status?.description}
+			</a>
+		{:else if summary?.status?.indicator == 'minor'}
+			<a
+				href="https://status.sailpoint.com"
+				class="text-yellow-500 text-center hover:underline"
+				rel="noreferrer"
+				target="_blank"
+			>
+				{summary?.status?.description}
+			</a>
+		{:else if summary?.status?.indicator == 'major'}
+			<a
+				href="https://status.sailpoint.com"
+				class="text-red-500 text-center hover:underline"
+				rel="noreferrer"
+				target="_blank"
+			>
+				{summary?.status?.description}
+			</a>
+		{/if}
+	</div>
+{/await}

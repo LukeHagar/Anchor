@@ -6,18 +6,17 @@
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
 
-	import { AppBar, AppShell, storeHighlightJs } from '@skeletonlabs/skeleton';
+	import { page } from '$app/stores';
+	import TenantLinks from '$lib/Components/TenantLinks.svelte';
 	import { checkSession } from '$lib/authentication';
 	import { idnSession } from '$lib/settings';
 	import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-	import { storePopup } from '@skeletonlabs/skeleton';
+	import { AppBar, AppShell, storeHighlightJs, storePopup } from '@skeletonlabs/skeleton';
 	import dayjs from 'dayjs';
 	import hljs from 'highlight.js';
 	import 'highlight.js/styles/github-dark.css';
 	import { onMount } from 'svelte';
-	import TenantLinks from '$lib/Components/TenantLinks.svelte';
-	import { page } from '$app/stores';
-	import Resources from '$lib/Components/Resources.svelte';
+	import SpotlightSearch from '$lib/Components/Spotlight/SpotlightSearch.svelte';
 
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 	storeHighlightJs.set(hljs);
@@ -40,19 +39,17 @@
 		<AppBar>
 			<svelte:fragment slot="lead">
 				<div class="flex flex-row gap-4">
-					<a class:text-primary-400={$page.url.pathname === '/'} href="/">Tenant</a>
-					<a class:text-primary-400={$page.url.pathname === '/api-client'} href="/api-client">
+					<a class:text-tertiary-400={$page.url.pathname === '/'} href="/">Tenant</a>
+					<a class:text-tertiary-400={$page.url.pathname === '/api-client'} href="/api-client">
 						API Client
 					</a>
-					<a class:text-primary-400={$page.url.pathname === '/session'} href="/session">Session</a>
+					<a class:text-tertiary-400={$page.url.pathname === '/session'} href="/session">Session</a>
 				</div>
 			</svelte:fragment>
-			<div class="flex flex-row justify-center gap-2">
-				<TenantLinks {idnSession} />
-				<Resources />
-			</div>
+
 			<svelte:fragment slot="trail">
 				<div class="p-1 top-0 right-0 flex flex-row gap-2">
+					<SpotlightSearch />
 					{#if minutesUntil < 0 || secondsUntil < 0}
 						<p class="text-xs text-white my-auto">
 							Strong Auth: <span class="text-red-500">Expired</span>
