@@ -1,9 +1,10 @@
-# Anchor
-Written By: Luke Hagar
-Contact: Lukeslakemail@gmail.com
-
 > This extension is not developed, maintained or supported by SailPoint. 
 > It is a community effort to help manage and support IdentityNow.
+
+# Anchor
+Written By: Luke Hagar  
+Contact: Lukeslakemail@gmail.com
+
 
 ## Description
 
