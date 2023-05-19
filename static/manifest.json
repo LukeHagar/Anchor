@@ -1,0 +1,19 @@
+{
+	"name": "Anchor",
+	"description": "Chrome extension built to aid in working with IdentityNow",
+	"version": "0.0.3",
+	"manifest_version": 3,
+	"icons": {
+		"12": "images/anchor_12.png",
+		"32": "images/anchor_32.png",
+		"48": "images/anchor_48.png",
+		"128": "images/anchor_128.png"
+	},
+	"permissions": ["tabs"],
+	"host_permissions": ["http://*/", "https://*/"],
+	"action": {
+		"default_popup": "index.html",
+		"default_icon": "images/anchor_32.png",
+		"default_title": "Anchor"
+	}
+}
