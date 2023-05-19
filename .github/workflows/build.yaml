@@ -87,10 +87,10 @@ jobs:
           name: anchor-${{ github.sha }}
           path: anchor/anchor-${{ github.sha }}.zip
 
-  upload-extension:
+  Upload-Extension:
     name: Upload extension
     runs-on: ubuntu-latest
-    needs: build-chrome-extension
+    needs: Build-And-Push
     env:
       # you can optionally specify extension ID here, we do this so that
       # all of our environments (dev, staging, prod) have a consistent ID
