@@ -2,9 +2,7 @@ name: Build and Upload Chrome Extension
 
 run-name: ${{ github.actor }} is Building and Uploading a new Anchor Version 🚀
 
-on:
-  push:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 jobs:
   Build-And-Push:
