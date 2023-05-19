@@ -80,7 +80,6 @@ export async function checkSession() {
 		} catch (error) {
 			const tenant = get(idnSession).tenant;
 			if (tenant) {
-				tabUrl = new URL(tenant);
 				const sessionResp = await fetch(tenant + '/ui/session').catch((err: Error) =>
 					console.debug(err)
 				);
