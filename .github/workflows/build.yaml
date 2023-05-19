@@ -1,7 +1,11 @@
 name: Build and Upload Chrome Extension
 
 run-name: ${{ github.actor }} is Building and Uploading a new Anchor Version 🚀
-on: [push, workflow_dispatch]
+
+on:
+  push:
+  workflow_dispatch:
+
 jobs:
   Build-And-Push:
     runs-on: ubuntu-latest
@@ -113,9 +117,4 @@ jobs:
 
       - name: Upload step
         run: |-
-          chrome-webstore-upload upload \\
-            --source anchor-${{ github.sha }}.zip \\
-            --extension-id ${{ env.EXTENSION_ID }} \\
-            --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} \\
-            --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} \\
-            --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
+          chrome-webstore-upload upload --source anchor-${{ github.sha }}.zip --extension-id ${{ env.EXTENSION_ID }} --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
