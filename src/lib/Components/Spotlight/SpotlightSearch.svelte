@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { matchSorter } from 'match-sorter';
-	import SvelteSpotlight from 'svelte-spotlight/SvelteSpotlight.svelte';
+	import SvelteSpotlight from 'svelte-spotlight';
 	import algoliasearch, { type SearchClient } from 'algoliasearch';
 	import type { Hit, IndexHit } from '$lib/utilities';
 	import { onMount } from 'svelte';
@@ -19,12 +18,14 @@
 	async function search(query: string) {
 		if (client) {
 			client.search<IndexHit>(indices.map((indexName) => ({ indexName, query }))).then((data) => {
-				// @ts-ignore
 				results = [];
 				for (const result of data.results) {
+					console.log(result);
+
 					results = [
 						...results,
-						...result.hits.map((entry) => {
+						// @ts-ignore
+						...result.hits.map((entry: IndexHit) => {
 							if (entry.hierarchy) {
 								return {
 									objectID: entry.objectID,
@@ -49,6 +50,7 @@
 						})
 					];
 				}
+				console.log(results);
 			});
 		}
 	}
@@ -58,8 +60,8 @@
 	onMount(() => (client = algoliasearch('TB01H1DFAM', '726952a7a9389c484b6c96808a3e0010')));
 </script>
 
-<div>
-	<button class="btn btn-sm variant-filled-surface" on:click={() => (isOpen = !isOpen)}>
+<div class="w-full mx-5">
+	<button class="btn btn-sm variant-filled-surface w-full" on:click={() => (isOpen = !isOpen)}>
 		Search
 	</button>
 

@@ -7,7 +7,7 @@
 	<div
 		class="flex flex-col p-2 card {result.category === 'Docs'
 			? 'variant-ringed-tertiary'
-			: 'variant-ringed-success'}"
+			: 'variant-ringed-success'} {selected === true ? '!ring-4' : ''}"
 	>
 		<div class="flex flex-row justify-between">
 			<p class="max-w-[350px] truncate">{result.title || result.section}</p>

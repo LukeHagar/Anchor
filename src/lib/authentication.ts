@@ -1,11 +1,4 @@
-import {
-	hostingData,
-	idnSession,
-	noHostingData,
-	noSession,
-	noTenantData,
-	tenantData
-} from './settings';
+import { idnSession, noSession, noTenantData, tenantData } from './settings';
 import { get } from 'svelte/store';
 
 // Gets currently active tab from Chrome via Extension API
@@ -26,24 +19,6 @@ export async function getActiveTabURL() {
 	}
 
 	return new URL(activeTab.url);
-}
-
-// retrieve the hosting data for the tenant from the API
-export async function getHostingData(session: IdnSession) {
-	console.debug('Retrieving Hosting Data');
-	const resp = await fetch(`${session.baseUrl}/beta/tenant-data/hosting-data`, {
-		method: 'GET',
-		headers: {
-			Authorization: `Bearer ${session.accessToken}`
-		}
-	});
-
-	if (resp.status === 401) return noHostingData;
-
-	const hostingData = (await resp.json()) satisfies HostingData;
-	console.debug(hostingData);
-
-	return hostingData;
 }
 
 // retrieve the tenant data for the tenant from the API
@@ -125,7 +100,6 @@ export async function checkSession() {
 	console.debug('Session Data');
 	console.debug(session);
 
-	hostingData.set(await getHostingData(session));
 	tenantData.set(await getTenantData(session));
 	idnSession.set({
 		...session,

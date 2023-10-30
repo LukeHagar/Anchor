@@ -15,14 +15,6 @@ export const noSession: IdnSession = {
 	expiration: new Date()
 };
 
-export const noHostingData: HostingData = {
-	org: 'No Data',
-	pod: 'No Data',
-	publicPod: 'No Data',
-	layer: 'No Data',
-	region: 'No Data'
-};
-
 export const noTenantData: TenantData = {
 	id: '',
 	alias: '',
@@ -133,5 +125,4 @@ export const noTenantData: TenantData = {
 };
 
 export const idnSession: Writable<IdnSession> = localStorageStore('tenantData', noSession);
-export const hostingData: Writable<HostingData> = writable(noHostingData);
 export const tenantData: Writable<TenantData> = writable(noTenantData);

@@ -17,9 +17,3 @@
 	<p class="text-sm">Tenant Type:</p>
 	<p class="text-sm">{$tenantData.org.orgType}</p>
 </div>
-<div class="flex flex-col justify-between">
-	<p class="text-sm pb-2">Enabled Features:</p>
-	{#each $tenantData.feature as feature}
-		<p class="text-xs">{feature}</p>
-	{/each}
-</div>

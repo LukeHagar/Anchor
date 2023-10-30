@@ -4,5 +4,10 @@
 </script>
 
 <div class="p-4 h-full flex flex-col justify-center">
-	<CodeBlock lineNumbers language="json" code={JSON.stringify($idnSession, null, ' ')} />
+	<CodeBlock
+		class="grow"
+		lineNumbers
+		language="json"
+		code={JSON.stringify($idnSession, null, ' ')}
+	/>
 </div>
